@@ -23,6 +23,11 @@ export const Container = styled.div`
   border-left: 1px solid ${cores.salmon};
   border-right: 1px solid ${cores.salmon};
   border-bottom: 1px solid ${cores.salmon};
+
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
 `
 
 export const Titulo = styled.h3`
@@ -47,7 +52,17 @@ export const Button = styled.button`
   background-color: ${cores.salmon};
   color: ${cores.pink};
   border: none;
+  font-size: 14px;
+  font-weight: bold;
   padding: 4px 6px;
-  width: fit-content;
   cursor: pointer;
+`
+
+export const Assessment = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  gap: 8px;
+  size: 18px;
+  color: ${cores.salmon};
 `
