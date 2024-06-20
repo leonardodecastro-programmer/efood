@@ -8,7 +8,7 @@ const Header = () => (
   <HeaderBar style={{ backgroundImage: `url(${bannerImg})` }}>
     <div className="container">
       <nav>
-        <Link to="/categories">Restaurantes</Link>
+        <Link to="/">Restaurantes</Link>
       </nav>
       <Link to="/">
         <img src={logo} alt="E-FOOD" />
