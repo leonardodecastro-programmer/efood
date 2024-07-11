@@ -4,6 +4,7 @@ import estrela from '../../assets/images/estrela.svg'
 
 import {
   Card,
+  MainContainer,
   Container,
   Descricao,
   Titulo,
@@ -31,13 +32,6 @@ export const Restaurant = ({
   destacado,
   id
 }: Props) => {
-  const getDescricao = (descricao: string) => {
-    if (descricao.length > 95) {
-      return descricao.slice(0, 190) + '...'
-    }
-    return descricao
-  }
-
   return (
     <Card>
       <img src={capa} alt={titulo} />
@@ -45,17 +39,19 @@ export const Restaurant = ({
         {destacado && <Tag>Destaque da semana</Tag>}
         <Tag>{tipo}</Tag>
       </Infos>
-      <Container>
+      <MainContainer>
         <div>
-          <Titulo>{titulo}</Titulo>
-          <Assessment>
-            <p>{avaliacao}</p>
-            <img src={estrela} alt="Avaliação" />
-          </Assessment>
+          <Container>
+            <Titulo>{titulo}</Titulo>
+            <Assessment>
+              <p>{avaliacao}</p>
+              <img src={estrela} alt="Avaliação" />
+            </Assessment>
+          </Container>
+          <Descricao>{descricao}</Descricao>
         </div>
-        <Descricao>{getDescricao(descricao)}</Descricao>
         <Button to={`/restaurant/${id}`}>Saiba mais</Button>
-      </Container>
+      </MainContainer>
     </Card>
   )
 }

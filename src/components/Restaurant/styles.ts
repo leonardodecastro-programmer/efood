@@ -22,20 +22,29 @@ export const Card = styled.div`
   }
 `
 
-export const Container = styled.div`
+export const MainContainer = styled.div`
   background-color: ${cores.white};
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   gap: 16px;
   padding: 8px;
   border-left: 1px solid ${cores.salmon};
   border-right: 1px solid ${cores.salmon};
   border-bottom: 1px solid ${cores.salmon};
 
-  div {
+  > div {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 16px;
   }
+`
+
+export const Container = styled.div`
+  gap: 16px;
+  display: flex;
+  justify-content: space-between;
 `
 
 export const Titulo = styled.h3`

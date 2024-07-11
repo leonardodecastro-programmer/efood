@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
-import { Link } from 'react-router-dom'
+
+type Props = {
+  modal: boolean
+}
 
 export const Card = styled.div`
   color: ${cores.white};
@@ -12,7 +15,7 @@ export const Card = styled.div`
   gap: 8px;
   padding: 8px;
 
-  div {
+  > div {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -20,7 +23,7 @@ export const Card = styled.div`
     > img {
       display: block;
       width: 100%;
-      height: 267px;
+      height: 167px;
       object-fit: cover;
     }
   }
@@ -38,15 +41,74 @@ export const Descricao = styled.p`
   display: block;
 `
 
-export const Button = styled(Link)`
+export const Button = styled.button<Props>`
   background-color: ${cores.pink};
   color: ${cores.salmon};
   border: none;
   font-size: 14px;
   font-weight: bold;
-  width: 100%;
+  width: ${({ modal }) => (modal ? '100%' : 'fit-content')};
   padding: 4px 6px;
   cursor: pointer;
-  text-decoration: none;
   text-align: center;
+`
+
+export const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  &.visivel {
+    display: flex;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+`
+
+export const ModalContent = styled.div`
+  width: 100%;
+  position: relative;
+  padding: 32px;
+  display: flex;
+  gap: 24px;
+  z-index: 1;
+  background-color: ${cores.salmon};
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  h1 {
+  }
+`
+
+export const ModalBanner = styled.img`
+  display: block;
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+`
+
+export const Close = styled.img`
+  position: absolute;
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  top: 8px;
+  right: 8px;
 `

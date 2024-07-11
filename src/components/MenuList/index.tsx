@@ -17,6 +17,8 @@ export const MenuList = ({ items }: Props) => (
             descricao={item.descricao}
             foto={item.foto}
             nome={item.nome}
+            porcao={item.porcao}
+            preco={item.preco}
           />
         ))}
       </List>
