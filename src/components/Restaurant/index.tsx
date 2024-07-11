@@ -30,25 +30,34 @@ export const Restaurant = ({
   avaliacao,
   destacado,
   id
-}: Props) => (
-  <Card>
-    <img src={capa} alt={titulo} />
-    <Infos>
-      {destacado && <Tag>Destaque da semana</Tag>}
-      <Tag>{tipo}</Tag>
-    </Infos>
-    <Container>
-      <div>
-        <Titulo>{titulo}</Titulo>
-        <Assessment>
-          <p>{avaliacao}</p>
-          <img src={estrela} alt="Avaliação" />
-        </Assessment>
-      </div>
-      <Descricao>{descricao}</Descricao>
-      <Button to={`/restaurant/${id}`}>Saiba mais</Button>
-    </Container>
-  </Card>
-)
+}: Props) => {
+  const getDescricao = (descricao: string) => {
+    if (descricao.length > 95) {
+      return descricao.slice(0, 190) + '...'
+    }
+    return descricao
+  }
+
+  return (
+    <Card>
+      <img src={capa} alt={titulo} />
+      <Infos>
+        {destacado && <Tag>Destaque da semana</Tag>}
+        <Tag>{tipo}</Tag>
+      </Infos>
+      <Container>
+        <div>
+          <Titulo>{titulo}</Titulo>
+          <Assessment>
+            <p>{avaliacao}</p>
+            <img src={estrela} alt="Avaliação" />
+          </Assessment>
+        </div>
+        <Descricao>{getDescricao(descricao)}</Descricao>
+        <Button to={`/restaurant/${id}`}>Saiba mais</Button>
+      </Container>
+    </Card>
+  )
+}
 
 export default Restaurant
