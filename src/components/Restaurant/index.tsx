@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import Tag from '../Tag'
 
 import estrela from '../../assets/images/estrela.svg'
@@ -14,39 +13,40 @@ import {
 } from './styles'
 
 type Props = {
-  title: string
-  description: string
-  infos: string[]
-  image: string
-  assessment: number
+  titulo: string
+  descricao: string
+  tipo: string
+  capa: string
+  avaliacao: number
+  destacado: boolean
+  id: number
 }
 
 export const Restaurant = ({
-  title,
-  description,
-  infos,
-  image,
-  assessment
+  titulo,
+  descricao,
+  tipo,
+  capa,
+  avaliacao,
+  destacado,
+  id
 }: Props) => (
   <Card>
-    <img src={image} alt={title} />
+    <img src={capa} alt={titulo} />
     <Infos>
-      {infos.map((info) => (
-        <Tag key={info}>{info}</Tag>
-      ))}
+      {destacado && <Tag>Destaque da semana</Tag>}
+      <Tag>{tipo}</Tag>
     </Infos>
     <Container>
       <div>
-        <Titulo>{title}</Titulo>
+        <Titulo>{titulo}</Titulo>
         <Assessment>
-          <p>{assessment}</p>
-          <img src={estrela} alt="" />
+          <p>{avaliacao}</p>
+          <img src={estrela} alt="Avaliação" />
         </Assessment>
       </div>
-      <Descricao>{description}</Descricao>
-      <Link to="/foods">
-        <Button>Saiba mais</Button>
-      </Link>
+      <Descricao>{descricao}</Descricao>
+      <Button to={`/restaurant/${id}`}>Saiba mais</Button>
     </Container>
   </Card>
 )

@@ -4,7 +4,7 @@ import { Props } from '.'
 import { cores } from '../../styles'
 import { Card } from '../Restaurant/styles'
 
-export const Container = styled.section<Omit<Props, 'title' | 'restaurants'>>`
+export const Container = styled.section<Omit<Props, 'titulo' | 'restaurants'>>`
   padding-bottom: 120px;
   background-color: ${cores.beige};
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
-import { TagContainer } from '../Tag/styles'
+import { Link } from 'react-router-dom'
 
 export const Card = styled.div`
   color: ${cores.white};
@@ -12,8 +12,17 @@ export const Card = styled.div`
   gap: 8px;
   padding: 8px;
 
-  ${TagContainer} {
-    margin-right: 8px;
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    > img {
+      display: block;
+      width: 100%;
+      height: 267px;
+      object-fit: cover;
+    }
   }
 `
 
@@ -29,7 +38,7 @@ export const Descricao = styled.p`
   display: block;
 `
 
-export const Button = styled.button`
+export const Button = styled(Link)`
   background-color: ${cores.pink};
   color: ${cores.salmon};
   border: none;
@@ -38,4 +47,6 @@ export const Button = styled.button`
   width: 100%;
   padding: 4px 6px;
   cursor: pointer;
+  text-decoration: none;
+  text-align: center;
 `

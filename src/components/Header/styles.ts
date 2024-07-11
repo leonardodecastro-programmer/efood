@@ -6,7 +6,6 @@ export const HeaderBar = styled.header`
   height: 186px;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 0 171px;
 
   .container {
     height: 100%;

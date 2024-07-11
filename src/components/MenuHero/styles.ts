@@ -3,7 +3,8 @@ import { cores } from '../../styles'
 
 export const Banner = styled.div`
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 280px;
   background-repeat: no-repeat;
