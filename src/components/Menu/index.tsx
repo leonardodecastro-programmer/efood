@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
-  Card,
+  Container,
+  List,
+  CardMenu,
   Descricao,
   Titulo,
   Button,
@@ -10,20 +12,28 @@ import {
   ModalBanner
 } from './styles'
 import close from '../../assets/images/close.png'
+import { add, open } from '../../store/redcuers/cart'
+import { useDispatch, useSelector } from 'react-redux'
+import { CardapioItem } from '../../pages/Home'
+import { RootReducer } from '../../store'
 
 export type Props = {
-  nome: string
-  descricao: string
-  foto: string
-  preco: number
-  porcao: string
+  items: CardapioItem[]
 }
 
-export const Menu = ({ nome, descricao, foto, preco, porcao }: Props) => {
-  const [isVisible, setIsVisible] = useState(false)
+const MenuList = ({ items }: Props) => {
+  const dispatch = useDispatch()
+  const { isOpen } = useSelector((state: RootReducer) => state.cart)
+
+  const [selectedItem, setSelectedItem] = useState<CardapioItem | null>(null)
 
   const closeModal = () => {
-    setIsVisible(false)
+    setSelectedItem(null)
+  }
+
+  const addToCart = (item: CardapioItem) => {
+    dispatch(add(item))
+    dispatch(open())
   }
 
   const getDescricao = (descricao: string) => {
@@ -33,44 +43,50 @@ export const Menu = ({ nome, descricao, foto, preco, porcao }: Props) => {
     return descricao
   }
 
+  useEffect(() => {
+    if (isOpen) {
+      setSelectedItem(null)
+    }
+  }, [isOpen])
+
   return (
-    <>
-      <Card>
-        <div>
-          <img src={foto} alt={nome} />
-          <Titulo>{nome}</Titulo>
-          <Descricao>{getDescricao(descricao)}</Descricao>
-        </div>
-        <Button modal={true} onClick={() => setIsVisible(true)}>
-          Mais detalhes
-        </Button>
-      </Card>
-      <Modal className={isVisible ? 'visivel' : ''}>
-        <ModalContent className="container">
-          <Close
-            src={close}
-            alt="Ícone de fechar"
-            onClick={() => {
-              closeModal()
-            }}
-          />
-          <ModalBanner src={foto} alt="" />
-          <div>
-            <h1>{nome}</h1>
-            <p>{descricao}</p>
-            <p>Serve: {porcao}</p>
-            <Button modal={false}>Adicionar ao carrinho - R${preco}</Button>
-          </div>
-        </ModalContent>
-        <div
-          className="overlay"
-          onClick={() => {
-            closeModal()
-          }}
-        ></div>
-      </Modal>
-    </>
+    <Container>
+      <div className="container">
+        <List>
+          {items.map((item) => (
+            <CardMenu key={item.id}>
+              <div>
+                <img src={item.foto} alt={item.nome} />
+                <Titulo>{item.nome}</Titulo>
+                <Descricao>{getDescricao(item.descricao)}</Descricao>
+              </div>
+              <Button modal={true} onClick={() => setSelectedItem(item)}>
+                Mais detalhes
+              </Button>
+            </CardMenu>
+          ))}
+        </List>
+      </div>
+
+      {selectedItem && (
+        <Modal className="visivel">
+          <ModalContent className="container">
+            <Close src={close} alt="Ícone de fechar" onClick={closeModal} />
+            <ModalBanner src={selectedItem.foto} alt={selectedItem.nome} />
+            <div>
+              <h1>{selectedItem.nome}</h1>
+              <p>{selectedItem.descricao}</p>
+              <p>Serve: {selectedItem.porcao}</p>
+              <Button modal={false} onClick={() => addToCart(selectedItem)}>
+                Adicionar ao carrinho - R${selectedItem.preco}
+              </Button>
+            </div>
+          </ModalContent>
+          <div className="overlay" onClick={closeModal}></div>
+        </Modal>
+      )}
+    </Container>
   )
 }
 
-export default Menu
+export default MenuList

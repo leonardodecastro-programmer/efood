@@ -4,18 +4,31 @@ import { HeaderBar } from './styles'
 
 import logo from '../../assets/images/logo.svg'
 
-const Header = () => (
-  <HeaderBar style={{ backgroundImage: `url(${bannerImg})` }}>
-    <div className="container">
-      <nav>
-        <Link to="/">Restaurantes</Link>
-      </nav>
-      <Link to="/">
-        <img src={logo} alt="E-FOOD" />
-      </Link>
-      <a href="#">0 produto(s) no carrinho</a>
-    </div>
-  </HeaderBar>
-)
+import { open } from '../../store/redcuers/cart'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
+
+const Header = () => {
+  const dispatch = useDispatch()
+  const { items } = useSelector((state: RootReducer) => state.cart)
+
+  const openCart = () => {
+    dispatch(open())
+  }
+
+  return (
+    <HeaderBar style={{ backgroundImage: `url(${bannerImg})` }}>
+      <div className="container">
+        <nav>
+          <Link to="/">Restaurantes</Link>
+        </nav>
+        <Link to="/">
+          <img src={logo} alt="E-FOOD" />
+        </Link>
+        <a onClick={openCart}>{items.length} produto(s) no carrinho</a>
+      </div>
+    </HeaderBar>
+  )
+}
 
 export default Header

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { Props } from '.'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import { Card } from '../Restaurant/styles'
 
 export const Container = styled.section<Omit<Props, 'titulo' | 'restaurants'>>`
@@ -17,6 +17,11 @@ export const List = styled.ul`
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(2, 1fr);
+
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: 1fr;
+  }
+
   grid-column-gap: 80px;
   grid-row-gap: 48px;
   margin-top: 80px;

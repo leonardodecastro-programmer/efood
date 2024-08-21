@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
+import { breakpoints } from '../../styles'
 
 export const Banner = styled.div`
   position: relative;
@@ -46,5 +47,9 @@ export const Infos = styled.div`
     font-size: 32px;
     margin-top: 25px;
     margin-bottom: 156px;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      margin-bottom: 128px;
+    }
   }
 `
