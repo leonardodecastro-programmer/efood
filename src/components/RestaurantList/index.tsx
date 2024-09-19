@@ -1,31 +1,39 @@
-import { Restaurante } from '../../pages/Home'
+import Loader from '../Loader'
 import Restaurant from '../Restaurant'
 
-import { Container, List } from './styles'
+import * as S from './styles'
 
 export type Props = {
-  restaurants: Restaurante[]
+  restaurants?: Restaurant[]
+  isLoading: boolean
 }
 
-export const RestaurantList = ({ restaurants }: Props) => (
-  <Container>
-    <div className="container">
-      <List>
-        {restaurants.map((restaurant) => (
-          <Restaurant
-            key={restaurant.id}
-            id={restaurant.id}
-            descricao={restaurant.descricao}
-            capa={restaurant.capa}
-            tipo={restaurant.tipo}
-            titulo={restaurant.titulo}
-            avaliacao={restaurant.avaliacao}
-            destacado={restaurant.destacado}
-          />
-        ))}
-      </List>
-    </div>
-  </Container>
-)
+export const RestaurantList = ({ restaurants, isLoading }: Props) => {
+  if (isLoading) {
+    return <Loader />
+  }
+
+  return (
+    <S.Container>
+      <div className="container">
+        <S.List>
+          {restaurants &&
+            restaurants.map((restaurant) => (
+              <Restaurant
+                key={restaurant.id}
+                id={restaurant.id}
+                descricao={restaurant.descricao}
+                capa={restaurant.capa}
+                tipo={restaurant.tipo}
+                titulo={restaurant.titulo}
+                avaliacao={restaurant.avaliacao}
+                destacado={restaurant.destacado}
+              />
+            ))}
+        </S.List>
+      </div>
+    </S.Container>
+  )
+}
 
 export default RestaurantList

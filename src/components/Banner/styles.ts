@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 
-export const Imagem = styled.div`
+export const Image = styled.div`
   width: 100%;
   height: 384px;
   display: block;
@@ -20,9 +20,9 @@ export const Imagem = styled.div`
   }
 `
 
-export const Titulo = styled.h2`
+export const Title = styled.h2`
   font-size: 36px;
   max-width: 540px;
   text-align: center;
-  color: ${cores.salmon};
+  color: ${colors.salmon};
 `

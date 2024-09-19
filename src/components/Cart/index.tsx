@@ -1,59 +1,59 @@
-import { Button } from '../Menu/styles'
-
-import { Overlay, CartContainer, SideBar, CartItem, Prices } from './styles'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../../store'
-import { close, remove } from '../../store/redcuers/cart'
 
-export const Cart = () => {
-  const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
+import { RootReducer } from '../../store'
+import { openDelivery, closeCart, remove } from '../../store/redcuers/cart'
+import Button from '../Button'
+import { formatPrice } from '../../utils'
+import { getTotalPrice } from '../../utils'
+
+import * as S from './styles'
+
+const Cart = () => {
+  const { items } = useSelector((state: RootReducer) => state.cart)
 
   const dispatch = useDispatch()
-
-  const formataPreco = (preco = 0) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(preco)
-  }
-
-  const getTotalPrice = () => {
-    return items.reduce((acumulador, valorAtual) => {
-      return (acumulador += valorAtual.preco!)
-    }, 0)
-  }
-
-  const closeCart = () => {
-    dispatch(close())
-  }
 
   const removeItem = (id: number) => {
     dispatch(remove(id))
   }
 
-  return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart} />
-      <SideBar>
-        <ul>
-          {items.map((item) => (
-            <CartItem key={item.id}>
-              <img src={item.foto} alt={item.nome} />
-              <div>
-                <h3>{item.nome}</h3>
-                <span>{formataPreco(item.preco)}</span>
-              </div>
-              <button onClick={() => removeItem(item.id)} type="button" />
-            </CartItem>
-          ))}
-        </ul>
-        <Prices>
-          Valor total
-          <span>{formataPreco(getTotalPrice())}</span>
-        </Prices>
-        <Button modal={true}>Continuar com a entrega</Button>
-      </SideBar>
-    </CartContainer>
+  function handleGoToDelivery() {
+    dispatch(openDelivery())
+    dispatch(closeCart())
+  }
+
+  return items.length > 0 ? (
+    <>
+      <ul>
+        {items.map((item) => (
+          <S.CartItem key={item.id}>
+            <img src={item.foto} alt={item.nome} />
+            <div>
+              <h3>{item.nome}</h3>
+              <span>{formatPrice(item.preco)}</span>
+            </div>
+            <button onClick={() => removeItem(item.id)} type="button" />
+          </S.CartItem>
+        ))}
+      </ul>
+      <S.Prices>
+        Valor total
+        <span>{formatPrice(getTotalPrice(items))}</span>
+      </S.Prices>
+      <Button
+        title="Clique aqui para continuar com a entrega"
+        type="button"
+        full
+        onClick={handleGoToDelivery}
+      >
+        Continuar com a entrega
+      </Button>
+    </>
+  ) : (
+    <p className="empty-text">
+      O carrinho está vazio, adicione pelo menos um produto para continuar com a
+      compra
+    </p>
   )
 }
 

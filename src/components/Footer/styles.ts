@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 
 export const Container = styled.footer`
-  background-color: ${cores.pink};
+  background-color: ${colors.pink};
   padding: 40px 0;
   font-size: 10px;
-  color: ${cores.salmon};
+  color: ${colors.salmon};
 
   .container {
     display: flex;

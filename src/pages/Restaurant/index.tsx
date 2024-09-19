@@ -1,26 +1,23 @@
+import { useParams } from 'react-router-dom'
+
 import Header from '../../components/Header'
 import MenuHero from '../../components/MenuHero'
 import Menu from '../../components/Menu'
-import { useParams } from 'react-router-dom'
-import { Restaurante } from '../Home'
-import { useEffect, useState } from 'react'
-
 import { useGetRestaurantQuery } from '../../services/api'
 
+type RestaurantParams = {
+  id: string
+}
+
 export const Restaurant = () => {
-  const { id } = useParams()
-
-  const { data: restaurant, isLoading } = useGetRestaurantQuery(id!)
-
-  if (!restaurant) {
-    return <h3>Carregando...</h3>
-  }
+  const { id } = useParams() as RestaurantParams
+  const { data: restaurant, isLoading } = useGetRestaurantQuery(id)
 
   return (
     <>
       <Header />
-      <MenuHero restaurant={restaurant} />
-      <Menu items={restaurant.cardapio} />
+      <MenuHero isLoading={isLoading} restaurant={restaurant} />
+      <Menu isLoading={isLoading} items={restaurant && restaurant.cardapio} />
     </>
   )
 }

@@ -1,39 +1,32 @@
-import { useEffect, useState } from 'react'
-import {
-  Container,
-  List,
-  CardMenu,
-  Descricao,
-  Titulo,
-  Button,
-  Modal,
-  ModalContent,
-  Close,
-  ModalBanner
-} from './styles'
-import close from '../../assets/images/close.png'
-import { add, open } from '../../store/redcuers/cart'
 import { useDispatch, useSelector } from 'react-redux'
-import { CardapioItem } from '../../pages/Home'
+import { useEffect, useState } from 'react'
+
+import Button from '../Button'
+import close from '../../assets/images/close.png'
+import { add, openCart } from '../../store/redcuers/cart'
 import { RootReducer } from '../../store'
 
+import * as S from './styles'
+import Loader from '../Loader'
+
 export type Props = {
-  items: CardapioItem[]
+  items?: MenuItem[]
+  isLoading: boolean
 }
 
-const MenuList = ({ items }: Props) => {
+const MenuList = ({ items, isLoading }: Props) => {
   const dispatch = useDispatch()
-  const { isOpen } = useSelector((state: RootReducer) => state.cart)
+  const { cartOpen } = useSelector((state: RootReducer) => state.cart)
 
-  const [selectedItem, setSelectedItem] = useState<CardapioItem | null>(null)
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null)
 
   const closeModal = () => {
     setSelectedItem(null)
   }
 
-  const addToCart = (item: CardapioItem) => {
+  const addToCart = (item: MenuItem) => {
     dispatch(add(item))
-    dispatch(open())
+    dispatch(openCart())
   }
 
   const getDescricao = (descricao: string) => {
@@ -44,48 +37,62 @@ const MenuList = ({ items }: Props) => {
   }
 
   useEffect(() => {
-    if (isOpen) {
+    if (cartOpen) {
       setSelectedItem(null)
     }
-  }, [isOpen])
+  }, [cartOpen])
+
+  if (isLoading) {
+    return <Loader />
+  }
 
   return (
-    <Container>
+    <S.Container>
       <div className="container">
-        <List>
-          {items.map((item) => (
-            <CardMenu key={item.id}>
-              <div>
-                <img src={item.foto} alt={item.nome} />
-                <Titulo>{item.nome}</Titulo>
-                <Descricao>{getDescricao(item.descricao)}</Descricao>
-              </div>
-              <Button modal={true} onClick={() => setSelectedItem(item)}>
-                Mais detalhes
-              </Button>
-            </CardMenu>
-          ))}
-        </List>
+        <S.List>
+          {items &&
+            items.map((item) => (
+              <S.CardMenu key={item.id}>
+                <div>
+                  <img src={item.foto} alt={item.nome} />
+                  <S.Title>{item.nome}</S.Title>
+                  <S.Description>{getDescricao(item.descricao)}</S.Description>
+                </div>
+                <Button
+                  type="button"
+                  title={`Clique aqui para ver mais detalhes da comida: ${item.nome}`}
+                  full
+                  onClick={() => setSelectedItem(item)}
+                >
+                  Mais detalhes
+                </Button>
+              </S.CardMenu>
+            ))}
+        </S.List>
       </div>
 
       {selectedItem && (
-        <Modal className="visivel">
-          <ModalContent className="container">
-            <Close src={close} alt="Ícone de fechar" onClick={closeModal} />
-            <ModalBanner src={selectedItem.foto} alt={selectedItem.nome} />
+        <S.Modal className="visivel">
+          <S.ModalContent className="container">
+            <S.Close src={close} alt="Ícone de fechar" onClick={closeModal} />
+            <S.ModalBanner src={selectedItem.foto} alt={selectedItem.nome} />
             <div>
               <h1>{selectedItem.nome}</h1>
               <p>{selectedItem.descricao}</p>
               <p>Serve: {selectedItem.porcao}</p>
-              <Button modal={false} onClick={() => addToCart(selectedItem)}>
+              <Button
+                type="button"
+                title="Clique aqui para adicionar esta comida"
+                onClick={() => addToCart(selectedItem)}
+              >
                 Adicionar ao carrinho - R${selectedItem.preco}
               </Button>
             </div>
-          </ModalContent>
+          </S.ModalContent>
           <div className="overlay" onClick={closeModal}></div>
-        </Modal>
+        </S.Modal>
       )}
-    </Container>
+    </S.Container>
   )
 }
 

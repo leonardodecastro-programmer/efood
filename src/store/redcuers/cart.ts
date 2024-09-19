@@ -1,34 +1,87 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CardapioItem } from '../../pages/Home'
+
+type DeliveryInfos = {
+  fullName: string
+  address: string
+  city: string
+  zipCode: string
+  houseNumber: string
+  complement?: string
+}
 
 type CartState = {
-  items: CardapioItem[]
-  isOpen: boolean
+  items: MenuItem[]
+  cartOpen: boolean
+  paymentOpen: boolean
+  deliveryOpen: boolean
+  deliveryInfos: DeliveryInfos
 }
 
 const initialState: CartState = {
   items: [],
-  isOpen: false
+  cartOpen: false,
+  paymentOpen: false,
+  deliveryOpen: false,
+  deliveryInfos: {
+    fullName: '',
+    address: '',
+    city: '',
+    zipCode: '',
+    houseNumber: '',
+    complement: ''
+  }
 }
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<CardapioItem>) => {
+    add: (state, action: PayloadAction<MenuItem>) => {
       state.items.push(action.payload)
     },
     remove: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter((item) => item.id !== action.payload)
     },
-    open: (state) => {
-      state.isOpen = true
+    openCart: (state) => {
+      state.cartOpen = true
     },
-    close: (state) => {
-      state.isOpen = false
+    closeCart: (state) => {
+      state.cartOpen = false
+    },
+    openPaymemt: (state) => {
+      state.paymentOpen = true
+    },
+
+    closePaymemt: (state) => {
+      state.paymentOpen = false
+    },
+    openDelivery: (state) => {
+      state.deliveryOpen = true
+    },
+    closeDelivery: (state) => {
+      state.deliveryOpen = false
+    },
+    closeSidebar: (state) => {
+      state.cartOpen = false
+      state.paymentOpen = false
+      state.deliveryOpen = false
+    },
+    setDeliveryInfos: (state, action: PayloadAction<DeliveryInfos>) => {
+      state.deliveryInfos = { ...state.deliveryInfos, ...action.payload }
     }
   }
 })
 
-export const { add, open, close, remove } = cartSlice.actions
+export const {
+  add,
+  openCart,
+  closeCart,
+  remove,
+  openPaymemt,
+  closePaymemt,
+  openDelivery,
+  closeDelivery,
+  closeSidebar,
+  setDeliveryInfos
+} = cartSlice.actions
 export default cartSlice.reducer

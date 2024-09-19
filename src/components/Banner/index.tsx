@@ -1,25 +1,25 @@
 import { Link } from 'react-router-dom'
 
-import { Imagem, Titulo } from './styles'
-
 import bannerImg from '../../assets/images/banner-cutlery.png'
 import logo from '../../assets/images/logo.svg'
 
+import * as S from './styles'
+
 const Banner = () => (
-  <Imagem style={{ backgroundImage: `url(${bannerImg})` }}>
+  <S.Image style={{ backgroundImage: `url(${bannerImg})` }}>
     <div className="container">
-      <Link to="/">
+      <Link title="Clique aqui para acessar a página home" to="/">
         <img src={logo} alt="E-FOOD" />
       </Link>
       <div>
-        <Titulo>
+        <S.Title>
           Viva experiências gastronômicas
           <br />
           no conforto da sua casa
-        </Titulo>
+        </S.Title>
       </div>
     </div>
-  </Imagem>
+  </S.Image>
 )
 
 export default Banner

@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
-export const cores = {
+export const colors = {
   white: '#FFFFFF',
   beige: '#FFF8F2',
   salmon: '#E66767',
@@ -23,8 +23,8 @@ export const GlobalCss = createGlobalStyle`
   }
 
   body {
-    background-color: ${cores.beige};
-    color: ${cores.white};
+    background-color: ${colors.beige};
+    color: ${colors.white};
   }
 
   .container {

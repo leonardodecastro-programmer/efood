@@ -1,18 +1,14 @@
 import styled from 'styled-components'
 
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { Card } from '../Restaurant/styles'
-
-type Props = {
-  modal: boolean
-}
 
 export const Container = styled.section`
   padding-bottom: 120px;
-  background-color: ${cores.beige};
+  background-color: ${colors.beige};
 
   ${Card} {
-    background-color: ${cores.white};
+    background-color: ${colors.white};
   }
 `
 
@@ -33,14 +29,9 @@ export const List = styled.ul`
   margin-top: 56px;
 `
 
-export const Title = styled.h2`
-  font-size: 18px;
-  font-weight: bold;
-`
-
 export const CardMenu = styled.div`
-  color: ${cores.white};
-  background-color: ${cores.salmon};
+  color: ${colors.white};
+  background-color: ${colors.salmon};
   position: relative;
   display: flex;
   flex-direction: column;
@@ -62,28 +53,16 @@ export const CardMenu = styled.div`
   }
 `
 
-export const Titulo = styled.h3`
+export const Title = styled.h2`
   font-weight: bold;
   font-size: 18px;
   display: block;
 `
 
-export const Descricao = styled.p`
+export const Description = styled.p`
   font-size: 14px;
   line-height: 22px;
   display: block;
-`
-
-export const Button = styled.button<Props>`
-  background-color: ${cores.pink};
-  color: ${cores.salmon};
-  border: none;
-  font-size: 14px;
-  font-weight: bold;
-  width: ${({ modal }) => (modal ? '100%' : 'fit-content')};
-  padding: 4px 6px;
-  cursor: pointer;
-  text-align: center;
 `
 
 export const Modal = styled.div`
@@ -118,16 +97,31 @@ export const ModalContent = styled.div`
   display: flex;
   gap: 24px;
   z-index: 1;
-  background-color: ${cores.salmon};
+  background-color: ${colors.salmon};
 
   @media (max-width: ${breakpoints.tablet}) {
     flex-direction: column;
+    width: 324px;
+    padding: 32px 20px;
   }
 
   div {
     display: flex;
     flex-direction: column;
     gap: 16px;
+
+    p {
+      width: 100%;
+      text-align: left;
+    }
+
+    @media (max-width: ${breakpoints.tablet}) {
+      align-items: center;
+
+      Button {
+        width: 100%;
+      }
+    }
   }
 
   h1 {
@@ -141,8 +135,8 @@ export const ModalBanner = styled.img`
   object-fit: cover;
 
   @media (max-width: ${breakpoints.tablet}) {
-    width: 140px;
-    height: 140px;
+    width: 100%;
+    height: 185px;
   }
 `
 
@@ -153,4 +147,8 @@ export const Close = styled.img`
   width: 16px;
   top: 8px;
   right: 8px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    right: 20px;
+  }
 `

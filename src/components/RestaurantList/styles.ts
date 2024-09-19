@@ -1,15 +1,17 @@
 import styled from 'styled-components'
 
 import { Props } from '.'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { Card } from '../Restaurant/styles'
 
-export const Container = styled.section<Omit<Props, 'titulo' | 'restaurants'>>`
+export const Container = styled.section<
+  Omit<Props, 'titulo' | 'restaurants' | 'isLoading'>
+>`
   padding-bottom: 120px;
-  background-color: ${cores.beige};
+  background-color: ${colors.beige};
 
   ${Card} {
-    background-color: ${cores.white};
+    background-color: ${colors.white};
   }
 `
 

@@ -1,17 +1,8 @@
 import Tag from '../Tag'
-
 import estrela from '../../assets/images/estrela.svg'
+import Button from '../Button'
 
-import {
-  Card,
-  MainContainer,
-  Container,
-  Descricao,
-  Titulo,
-  Infos,
-  Button,
-  Assessment
-} from './styles'
+import * as S from './styles'
 
 type Props = {
   titulo: string
@@ -33,26 +24,32 @@ export const Restaurant = ({
   id
 }: Props) => {
   return (
-    <Card>
+    <S.Card>
       <img src={capa} alt={titulo} />
-      <Infos>
+      <S.Infos>
         {destacado && <Tag>Destaque da semana</Tag>}
         <Tag>{tipo}</Tag>
-      </Infos>
-      <MainContainer>
+      </S.Infos>
+      <S.MainContainer>
         <div>
-          <Container>
-            <Titulo>{titulo}</Titulo>
-            <Assessment>
+          <S.Container>
+            <S.Title>{titulo}</S.Title>
+            <S.Assessment>
               <p>{avaliacao}</p>
               <img src={estrela} alt="Avaliação" />
-            </Assessment>
-          </Container>
-          <Descricao>{descricao}</Descricao>
+            </S.Assessment>
+          </S.Container>
+          <S.Description>{descricao}</S.Description>
         </div>
-        <Button to={`/restaurant/${id}`}>Saiba mais</Button>
-      </MainContainer>
-    </Card>
+        <Button
+          type="link"
+          title={`Clique aqui para ver mais detalhes do restaurante: ${titulo}`}
+          to={`/restaurant/${id}`}
+        >
+          Saiba mais
+        </Button>
+      </S.MainContainer>
+    </S.Card>
   )
 }
 

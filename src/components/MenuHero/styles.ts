@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 import { breakpoints } from '../../styles'
 
 export const Banner = styled.div`
@@ -38,12 +38,12 @@ export const Infos = styled.div`
   h2 {
     font-size: 32px;
     font-weight: 900;
-    color: ${cores.white};
+    color: ${colors.white};
   }
 
   p {
     font-weight: 100;
-    color: ${cores.white};
+    color: ${colors.white};
     font-size: 32px;
     margin-top: 25px;
     margin-bottom: 156px;

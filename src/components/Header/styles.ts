@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const HeaderBar = styled.header`
   width: 100%;
@@ -12,22 +12,28 @@ export const HeaderBar = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      padding: 24px 0;
+    }
   }
 
-  a {
-    color: ${cores.white};
+  a,
+  span {
     text-decoration: none;
     font-weight: 900;
     font-size: 18px;
-    color: ${cores.salmon};
+    color: ${colors.salmon};
+    display: flex;
+    cursor: pointer;
   }
 
   div {
     display: flex;
     align-items: center;
-  }
 
-  @media (max-width: ${breakpoints.tablet}) {
-    display: none;
+    @media (max-width: ${breakpoints.tablet}) {
+      flex-direction: column;
+    }
   }
 `

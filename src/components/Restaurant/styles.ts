@@ -1,10 +1,9 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 import { TagContainer } from '../Tag/styles'
-import { Link } from 'react-router-dom'
 
 export const Card = styled.div`
-  color: ${cores.salmon};
+  color: ${colors.salmon};
   position: relative;
   display: flex;
   flex-direction: column;
@@ -23,16 +22,16 @@ export const Card = styled.div`
 `
 
 export const MainContainer = styled.div`
-  background-color: ${cores.white};
+  background-color: ${colors.white};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
   gap: 16px;
   padding: 8px;
-  border-left: 1px solid ${cores.salmon};
-  border-right: 1px solid ${cores.salmon};
-  border-bottom: 1px solid ${cores.salmon};
+  border-left: 1px solid ${colors.salmon};
+  border-right: 1px solid ${colors.salmon};
+  border-bottom: 1px solid ${colors.salmon};
 
   > div {
     display: flex;
@@ -47,13 +46,13 @@ export const Container = styled.div`
   justify-content: space-between;
 `
 
-export const Titulo = styled.h3`
+export const Title = styled.h3`
   font-weight: bold;
   font-size: 18px;
   display: block;
 `
 
-export const Descricao = styled.p`
+export const Description = styled.p`
   font-size: 14px;
   line-height: 22px;
   display: block;
@@ -65,23 +64,11 @@ export const Infos = styled.div`
   right: 16px;
 `
 
-export const Button = styled(Link)`
-  background-color: ${cores.salmon};
-  color: ${cores.pink};
-  border: none;
-  width: fit-content;
-  font-size: 14px;
-  font-weight: bold;
-  padding: 4px 6px;
-  cursor: pointer;
-  text-decoration: none;
-`
-
 export const Assessment = styled.div`
   display: flex;
   align-items: center;
   font-weight: bold;
   gap: 8px;
   size: 18px;
-  color: ${cores.salmon};
+  color: ${colors.salmon};
 `
