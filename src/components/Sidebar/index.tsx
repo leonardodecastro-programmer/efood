@@ -23,7 +23,12 @@ export const Sidebar = () => {
       className={cartOpen || deliveryOpen || paymentOpen ? 'is-open' : ''}
     >
       <S.Overlay onClick={HandleCloseSidebar} />
-      <S.SideBar>{cartOpen ? <Cart /> : <Checkout />}</S.SideBar>
+      <S.SideBar>
+        <>
+          <Cart />
+          <Checkout />
+        </>
+      </S.SideBar>
     </S.SidebarContainer>
   )
 }

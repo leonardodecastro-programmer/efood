@@ -2,6 +2,14 @@ import styled from 'styled-components'
 import { colors } from '../../styles'
 import lixeira from '../../assets/images/lixeira.png'
 
+export const Container = styled.div`
+  display: none;
+
+  &.cart-is-open {
+    display: block;
+  }
+`
+
 export const Prices = styled.p`
   font-weight: bold;
   font-size: 14px;

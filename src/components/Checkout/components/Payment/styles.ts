@@ -7,12 +7,17 @@ export const Container = styled.div`
   h1 {
     font-size: 16px;
     font-weight: 700;
-    margin-bottom: 16px;
     color: ${colors.pink};
   }
 
   &.payment-is-open {
     display: block;
+  }
+`
+
+export const Payment = styled.div`
+  h1 {
+    margin-bottom: 16px;
   }
 `
 

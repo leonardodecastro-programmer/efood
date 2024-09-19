@@ -68,6 +68,9 @@ const cartSlice = createSlice({
     },
     setDeliveryInfos: (state, action: PayloadAction<DeliveryInfos>) => {
       state.deliveryInfos = { ...state.deliveryInfos, ...action.payload }
+    },
+    clear: (state) => {
+      state.items = []
     }
   }
 })
@@ -82,6 +85,7 @@ export const {
   openDelivery,
   closeDelivery,
   closeSidebar,
-  setDeliveryInfos
+  setDeliveryInfos,
+  clear
 } = cartSlice.actions
 export default cartSlice.reducer
