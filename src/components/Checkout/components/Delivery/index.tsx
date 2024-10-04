@@ -1,3 +1,4 @@
+import InputMask from 'react-input-mask'
 import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -97,7 +98,7 @@ const Delivery = () => {
           <S.Column>
             <S.InputGroup>
               <label>CEP</label>
-              <input
+              <InputMask
                 id="zipCode"
                 type="text"
                 name="zipCode"
@@ -105,6 +106,7 @@ const Delivery = () => {
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
                 className={checkInputHasError('zipCode') ? 'error' : ''}
+                mask="99999-999"
               />
             </S.InputGroup>
             <S.InputGroup>

@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import InputMask from 'react-input-mask'
 import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -148,31 +149,33 @@ const Payment = () => {
               <S.Column>
                 <S.InputGroup>
                   <label>Número do cartão</label>
-                  <input
+                  <InputMask
                     id="cardNumber"
                     type="text"
                     value={form.values.cardNumber}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                     className={checkInputHasError('cardNumber') ? 'error' : ''}
+                    mask="9999 9999 9999 9999"
                   />
                 </S.InputGroup>
                 <S.InputGroup>
                   <label>CVV</label>
-                  <input
+                  <InputMask
                     id="cardCode"
                     type="text"
                     value={form.values.cardCode}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                     className={checkInputHasError('cardCode') ? 'error' : ''}
+                    mask="999"
                   />
                 </S.InputGroup>
               </S.Column>
               <S.Column>
                 <S.InputGroup>
                   <label>Mês de vencimento</label>
-                  <input
+                  <InputMask
                     id="expiresMonth"
                     type="text"
                     value={form.values.expiresMonth}
@@ -181,17 +184,19 @@ const Payment = () => {
                     className={
                       checkInputHasError('expiresMonth') ? 'error' : ''
                     }
+                    mask="99"
                   />
                 </S.InputGroup>
                 <S.InputGroup>
                   <label>Ano de vencimento</label>
-                  <input
+                  <InputMask
                     id="expiresYear"
                     type="text"
                     value={form.values.expiresYear}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                     className={checkInputHasError('expiresYear') ? 'error' : ''}
+                    mask="99"
                   />
                 </S.InputGroup>
               </S.Column>
